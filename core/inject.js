@@ -41,7 +41,7 @@ Blockly.inject = function(container, opt_options) {
   }
   if (opt_options) {
     // TODO(scr): don't mix this in to global variables.
-    goog.mixin(Blockly, Blockly.parseOptions_(opt_options));
+    goog.mixin(Blockly, Blockly.parseOptions_(opt_options)); //进行复制到Blockly 放入 blockly全局对象 一个Toolbox JSON对象
   }
   Blockly.createDom_(container);
   Blockly.init_();

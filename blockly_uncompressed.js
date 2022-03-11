@@ -924,7 +924,7 @@ goog.addDependency("../../third_party/closure/goog/caja/string/html/htmlsanitize
 goog.addDependency("../../third_party/closure/goog/caja/string/html/htmlparser.js", ['goog.string.html.HtmlParser', 'goog.string.html.HtmlParser.EFlags', 'goog.string.html.HtmlParser.Elements', 'goog.string.html.HtmlParser.Entities', 'goog.string.html.HtmlSaxHandler'], []);
 
 // Load Blockly.
-goog.require('Blockly');
+goog.require('Blockly'); // 相当于 Java的import
 goog.require('Blockly.Block');
 goog.require('Blockly.BlockSvg');
 goog.require('Blockly.Blocks');

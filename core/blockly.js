@@ -24,7 +24,7 @@
 'use strict';
 
 // Top level object for Blockly.
-goog.provide('Blockly');
+goog.provide('Blockly'); // ÉùÃ÷Blockly¶ÔÏó
 
 // Blockly core dependencies.
 goog.require('Blockly.Block');
