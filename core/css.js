@@ -35,6 +35,9 @@ goog.require('goog.cssom');
  * b) It speeds up loading by not blocking on a separate HTTP transfer.
  * c) The CSS content may be made dynamic depending on init options.
  */
+/**
+ * 添加常量CSS样式 用于前端 workspace空间
+ */
 Blockly.Css.inject = function() {
   var text = Blockly.Css.CONTENT.join('\n');
   // Strip off any trailing slash (either Unix or Windows).

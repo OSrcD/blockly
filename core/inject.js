@@ -41,9 +41,11 @@ Blockly.inject = function(container, opt_options) {
   }
   if (opt_options) {
     // TODO(scr): don't mix this in to global variables.
-    goog.mixin(Blockly, Blockly.parseOptions_(opt_options)); //进行复制到Blockly 放入 blockly全局对象 一个Toolbox JSON对象
+    goog.mixin(Blockly, Blockly.parseOptions_(opt_options)); //进行复制到 Blockly 放入 blockly全局对象 一个 Toolbox 上面返回JSON对象
   }
+  // 创建可视化区域
   Blockly.createDom_(container);
+  // 创建树形菜单，垃圾桶
   Blockly.init_();
 };
 
@@ -118,6 +120,7 @@ Blockly.createDom_ = function(container) {
   // Sadly browsers (Chrome vs Firefox) are currently inconsistent in laying
   // out content in RTL mode.  Therefore Blockly forces the use of LTR,
   // then manually positions content in RTL as needed.
+  // 给 div 标签添加 dir 属性为 ltr
   container.setAttribute('dir', 'LTR');
   // Closure can be trusted to create HTML widgets with the proper direction.
   goog.ui.Component.setDefaultRightToLeft(Blockly.RTL);
@@ -136,6 +139,7 @@ Blockly.createDom_ = function(container) {
     ...
   </svg>
   */
+  // 工作空间的SVG元素 用于存放block块 以及垃圾桶
   var svg = Blockly.createSvgElement('svg', {
     'xmlns': 'http://www.w3.org/2000/svg',
     'xmlns:html': 'http://www.w3.org/1999/xhtml',
@@ -148,6 +152,7 @@ Blockly.createDom_ = function(container) {
     ... filters go here ...
   </defs>
   */
+  // 用于工作空间过滤垃圾桶的元素
   var defs = Blockly.createSvgElement('defs', {}, svg);
   var filter, feSpecularLighting, feMerge, pattern;
   /*
@@ -164,18 +169,24 @@ Blockly.createDom_ = function(container) {
                    k1="0" k2="1" k3="1" k4="0"/>
     </filter>
   */
+  // 以defs为父元素创建filter的元素
   filter = Blockly.createSvgElement('filter', {'id': 'blocklyEmboss'}, defs);
+  // 以filter为元素创建feGaussianBlur的元素
   Blockly.createSvgElement('feGaussianBlur',
       {'in': 'SourceAlpha', 'stdDeviation': 1, 'result': 'blur'}, filter);
+  // 以filter为元素创建feSpecularLighting的元素
   feSpecularLighting = Blockly.createSvgElement('feSpecularLighting',
       {'in': 'blur', 'surfaceScale': 1, 'specularConstant': 0.5,
       'specularExponent': 10, 'lighting-color': 'white', 'result': 'specOut'},
       filter);
+  // 以feSpecularLighting为元素创建fePointLight的元素
   Blockly.createSvgElement('fePointLight',
       {'x': -5000, 'y': -10000, 'z': 20000}, feSpecularLighting);
+  // 以filter为元素创建feComposite的元素
   Blockly.createSvgElement('feComposite',
       {'in': 'specOut', 'in2': 'SourceAlpha', 'operator': 'in',
       'result': 'specOut'}, filter);
+  // 以filter为元素创建feComposite的元素
   Blockly.createSvgElement('feComposite',
       {'in': 'SourceGraphic', 'in2': 'specOut', 'operator': 'arithmetic',
       'k1': 0, 'k2': 1, 'k3': 1, 'k4': 0}, filter);
@@ -189,20 +200,28 @@ Blockly.createDom_ = function(container) {
       </feMerge>
     </filter>
   */
+  // 过滤垃圾桶，使垃圾桶可以看见
+  // 以defs为父元素创建filter的元素
   filter = Blockly.createSvgElement('filter',
       {'id': 'blocklyTrashcanShadowFilter'}, defs);
+  // 以filter为父元素创建feGaussianBlur的元素
   Blockly.createSvgElement('feGaussianBlur',
       {'in': 'SourceAlpha', 'stdDeviation': 2, 'result': 'blur'}, filter);
+  // 以filter父元素创建feOffset的元素
   Blockly.createSvgElement('feOffset',
       {'in': 'blur', 'dx': 1, 'dy': 1, 'result': 'offsetBlur'}, filter);
+  // 以filter为父元素创建feMerge元素
   feMerge = Blockly.createSvgElement('feMerge', {}, filter);
+  // 以feMerge为父元素创建feMergeNode元素
   Blockly.createSvgElement('feMergeNode', {'in': 'offsetBlur'}, feMerge);
+  // 以feMerge为元素创建feMergeNode元素
   Blockly.createSvgElement('feMergeNode', {'in': 'SourceGraphic'}, feMerge);
   /*
     <filter id="blocklyShadowFilter">
       <feGaussianBlur stdDeviation="2"/>
     </filter>
   */
+  // 以defs为父元素创建
   filter = Blockly.createSvgElement('filter',
       {'id': 'blocklyShadowFilter'}, defs);
   Blockly.createSvgElement('feGaussianBlur', {'stdDeviation': 2}, filter);
@@ -223,7 +242,7 @@ Blockly.createDom_ = function(container) {
   Blockly.mainWorkspace = new Blockly.Workspace(
       Blockly.getMainWorkspaceMetrics_,
       Blockly.setMainWorkspaceMetrics_);
-  svg.appendChild(Blockly.mainWorkspace.createDom());
+  svg.appendChild(Blockly.mainWorkspace.createDom()); // 返回 <g>组 元素
   Blockly.mainWorkspace.maxBlocks = Blockly.maxBlocks;
 
   if (!Blockly.readOnly) {
@@ -365,7 +384,7 @@ Blockly.init_ = function() {
 
   if (Blockly.languageTree) {
     if (Blockly.hasCategories) {
-      Blockly.Toolbox.init();
+      Blockly.Toolbox.init(); // 调谷歌API 构建树形菜单
     } else {
       // Build a fixed flyout with the root blocks.
       Blockly.mainWorkspace.flyout_.init(Blockly.mainWorkspace, true);
@@ -377,16 +396,16 @@ Blockly.init_ = function() {
       Blockly.mainWorkspace.getBubbleCanvas().setAttribute('transform',
                                                            translation);
     }
-  }
+  }// 添加滚动条
   if (Blockly.hasScrollbars) {
     Blockly.mainWorkspace.scrollbar = new Blockly.ScrollbarPair(
         Blockly.mainWorkspace);
     Blockly.mainWorkspace.scrollbar.resize();
   }
 
-  Blockly.mainWorkspace.addTrashcan();
+  Blockly.mainWorkspace.addTrashcan(); // 添加垃圾桶
 
-  // Load the sounds.
+  // Load the sounds. // 加载声音
   Blockly.loadAudio_(
       ['media/click.mp3', 'media/click.wav', 'media/click.ogg'], 'click');
   Blockly.loadAudio_(

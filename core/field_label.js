@@ -59,7 +59,7 @@ Blockly.FieldLabel.prototype.init = function(block) {
     throw 'Text has already been initialized once.';
   }
   this.sourceBlock_ = block;
-  block.getSvgRoot().appendChild(this.textElement_);
+  block.getSvgRoot().appendChild(this.textElement_); // Ìí¼ÓÎÄ±¾
 
   // Configure the field to be transparent with respect to tooltips.
   this.textElement_.tooltip = this.sourceBlock_;

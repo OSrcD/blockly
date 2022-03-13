@@ -62,12 +62,12 @@ Blockly.BlockSvg.INLINE = -1;
  */
 Blockly.BlockSvg.prototype.init = function() {
   var block = this.block_;
-  this.updateColour();
+  this.updateColour(); // 更新颜色
   for (var x = 0, input; input = block.inputList[x]; x++) {
-    input.init();
+    input.init(); // 初始化文本标题
   }
   if (block.mutator) {
-    block.mutator.createIcon();
+    block.mutator.createIcon(); // 创建图标
   }
 };
 
@@ -475,15 +475,15 @@ Blockly.BlockSvg.prototype.render = function() {
   // Move the icons into position.
   var icons = this.block_.getIcons();
   for (var x = 0; x < icons.length; x++) {
-    cursorX = icons[x].renderIcon(cursorX);
+    cursorX = icons[x].renderIcon(cursorX); // 移动图标
   }
   cursorX += Blockly.RTL ?
       Blockly.BlockSvg.SEP_SPACE_X : -Blockly.BlockSvg.SEP_SPACE_X;
   // If there are no icons, cursorX will be 0, otherwise it will be the
   // width that the first label needs to move over by.
 
-  var inputRows = this.renderCompute_(cursorX);
-  this.renderDraw_(cursorX, inputRows);
+  var inputRows = this.renderCompute_(cursorX); // 计算渲染的高度
+  this.renderDraw_(cursorX, inputRows); // 渲染整个 block
 
   // Render all blocks above this one (propagate a reflow).
   var parentBlock = this.block_.getParent();

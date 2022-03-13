@@ -162,7 +162,7 @@ Blockly.Input.prototype.setAlign = function(align) {
 };
 
 /**
- * Initialize the titles on this input.
+ * Initialize the titles on this input. 初始化文本标题
  */
 Blockly.Input.prototype.init = function() {
   for (var x = 0; x < this.titleRow.length; x++) {

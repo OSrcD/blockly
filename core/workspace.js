@@ -103,7 +103,7 @@ Blockly.Workspace.prototype.fireChangeEventPid_ = null;
 Blockly.Workspace.prototype.scrollbar = null;
 
 /**
- * Create the trash can elements.
+ * Create the trash can elements.创建垃圾桶元素
  * @return {!Element} The workspace's SVG group.
  */
 Blockly.Workspace.prototype.createDom = function() {
@@ -167,7 +167,7 @@ Blockly.Workspace.prototype.getBubbleCanvas = function() {
 };
 
 /**
- * Add a block to the list of top blocks.
+ * Add a block to the list of top blocks. //添加block到一个数组
  * @param {!Blockly.Block} block Block to remove.
  */
 Blockly.Workspace.prototype.addTopBlock = function(block) {
@@ -322,7 +322,7 @@ Blockly.Workspace.prototype.fireChangeEvent = function() {
   if (this.fireChangeEventPid_) {
     window.clearTimeout(this.fireChangeEventPid_);
   }
-  var canvas = this.svgBlockCanvas_;
+  var canvas = this.svgBlockCanvas_; // <g> 为 <g></g> </g>
   if (canvas) {
     this.fireChangeEventPid_ = window.setTimeout(function() {
         Blockly.fireUiEvent(canvas, 'blocklyWorkspaceChange');

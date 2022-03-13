@@ -70,7 +70,7 @@ Blockly.Toolbox.CONFIG_ = {
  * @param {!Element} container The SVG's HTML parent element.
  */
 Blockly.Toolbox.createDom = function(svg, container) {
-  // Create an HTML container for the Toolbox menu.
+  // Create an HTML container for the Toolbox menu. 创建一个 blocklyToolboxDiv 存放树形菜单
   Blockly.Toolbox.HtmlDiv = goog.dom.createDom('div', 'blocklyToolboxDiv');
   Blockly.Toolbox.HtmlDiv.setAttribute('dir', Blockly.RTL ? 'RTL' : 'LTR');
   container.appendChild(Blockly.Toolbox.HtmlDiv);
@@ -112,13 +112,13 @@ Blockly.Toolbox.init = function() {
 
   Blockly.Toolbox.HtmlDiv.style.display = 'block';
   Blockly.Toolbox.flyout_.init(Blockly.mainWorkspace, true);
-  Blockly.Toolbox.populate_();
-  tree.render(Blockly.Toolbox.HtmlDiv);
+  Blockly.Toolbox.populate_(); // 动态添加树形菜单
+  tree.render(Blockly.Toolbox.HtmlDiv);// 渲染树形菜单
 
   // If the document resizes, reposition the toolbox.
   goog.events.listen(window, goog.events.EventType.RESIZE,
                      Blockly.Toolbox.position_);
-  Blockly.Toolbox.position_();
+  Blockly.Toolbox.position_(); // 调整位置
 };
 
 /**

@@ -100,7 +100,7 @@ Blockly.Flyout.prototype.CORNER_RADIUS = 8;
 Blockly.Flyout.prototype.onResizeWrapper_ = null;
 
 /**
- * Creates the flyout's DOM.  Only needs to be called once.
+ * Creates the flyout's DOM.  Only needs to be called once.创建点击菜单，弹出代码块
  * @return {!Element} The flyout's SVG group.
  */
 Blockly.Flyout.prototype.createDom = function() {
@@ -337,7 +337,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
       if (xml.tagName && xml.tagName.toUpperCase() == 'BLOCK') {
         var block = Blockly.Xml.domToBlock_(
             /** @type {!Blockly.Workspace} */ (this.workspace_), xml);
-        blocks.push(block);
+        blocks.push(block); // 把block存放到数组
         gaps.push(margin * 3);
       }
     }
@@ -361,7 +361,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     var root = block.getSvgRoot();
     var blockHW = block.getHeightWidth();
     var x = Blockly.RTL ? 0 : margin + Blockly.BlockSvg.TAB_WIDTH;
-    block.moveBy(x, cursorY);
+    block.moveBy(x, cursorY); // 块之间移动
     cursorY += blockHW.height + gaps[i];
 
     // Create an invisible rectangle under the block to act as a button.  Just
@@ -391,7 +391,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
         block.svg_.removeSelect));
   }
   this.width_ = 0;
-  this.reflow();
+  this.reflow(); // 给弹出块添加阴影
 
   this.filterForCapacity_();
 

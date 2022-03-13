@@ -563,7 +563,7 @@ goog.ui.tree.BaseNode.prototype.isSelected = function() {
 goog.ui.tree.BaseNode.prototype.select = function() {
   var tree = this.getTree();
   if (tree) {
-    tree.setSelectedItem(this);
+    tree.setSelectedItem(this); // äÖÈ¾Controlµ¯³ö²Ëµ¥
   }
 };
 

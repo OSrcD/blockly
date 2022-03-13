@@ -580,6 +580,7 @@ Blockly.setCursorHand_ = function(closed) {
 };
 
 /**
+ * 返回工作可视化代码块区域大小
  * Return an object with all the metrics required to size scrollbars for the
  * main workspace.  The following properties are computed:
  * .viewHeight: Height of the visible rectangle,
@@ -642,6 +643,7 @@ Blockly.getMainWorkspaceMetrics_ = function() {
  * @param {!Object} xyRatio Contains an x and/or y property which is a float
  *     between 0 and 1 specifying the degree of scrolling.
  * @private
+ * 设置主工作区域的滚动条大小
  */
 Blockly.setMainWorkspaceMetrics_ = function(xyRatio) {
   if (!Blockly.mainWorkspace.scrollbar) {

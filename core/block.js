@@ -76,7 +76,7 @@ Blockly.Block = function(workspace, prototypeName) {
   this.workspace = workspace;
   this.isInFlyout = workspace.isFlyout;
 
-  workspace.addTopBlock(this);
+  workspace.addTopBlock(this);// 添加block到一个数组
 
   // Copy the type-specific functions and data from the prototype.
   if (prototypeName) {
@@ -144,13 +144,13 @@ Blockly.Block.prototype.getIcons = function() {
  * Create and initialize the SVG representation of the block.
  */
 Blockly.Block.prototype.initSvg = function() {
-  this.svg_ = new Blockly.BlockSvg(this);
-  this.svg_.init();
+  this.svg_ = new Blockly.BlockSvg(this); // 创建一个BlockSvg元素对象
+  this.svg_.init(); // 初始化Block SVG元素
   if (!Blockly.readOnly) {
     Blockly.bindEvent_(this.svg_.getRootElement(), 'mousedown', this,
-                       this.onMouseDown_);
+                       this.onMouseDown_);// 绑定block 鼠标按下事件
   }
-  this.workspace.getCanvas().appendChild(this.svg_.getRootElement());
+  this.workspace.getCanvas().appendChild(this.svg_.getRootElement()); // <g transform="translate(94,0)" 下增加g
 };
 
 /**

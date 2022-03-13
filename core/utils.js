@@ -243,10 +243,10 @@ Blockly.getAbsoluteXY_ = function(element) {
 
 /**
  * Helper method for creating SVG elements.
- * @param {string} name Element's tag name.
- * @param {!Object} attrs Dictionary of attribute names and values.
- * @param {Element=} opt_parent Optional parent on which to append the element.
- * @return {!SVGElement} Newly created SVG element.
+ * @param {string} 创建SVG的元素名 name Element's tag name.
+ * @param {!Object} 添加SVG的属性 attrs Dictionary of attribute names and values.
+ * @param {Element=} 父类的SVG元素 opt_parent Optional parent on which to append the element.
+ * @return {!SVGElement} 返回SVG元素 Newly created SVG element.
  */
 Blockly.createSvgElement = function(name, attrs, opt_parent) {
   var e = /** @type {!SVGElement} */ (
@@ -260,7 +260,9 @@ Blockly.createSvgElement = function(name, attrs, opt_parent) {
   if (document.body.runtimeStyle) {  // Indicates presence of IE-only attr.
     e.runtimeStyle = e.currentStyle = e.style;
   }
+  // 从svg父类元素增加defs子元素
   if (opt_parent) {
+    // opt_parent 为元素名+class类名
     opt_parent.appendChild(e);
   }
   return e;

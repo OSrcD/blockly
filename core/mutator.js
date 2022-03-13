@@ -60,7 +60,7 @@ Blockly.Mutator.prototype.workspaceWidth_ = 0;
 Blockly.Mutator.prototype.workspaceHeight_ = 0;
 
 /**
- * Create the icon on the block.
+ * Create the icon on the block. 创建图标
  */
 Blockly.Mutator.prototype.createIcon = function() {
   Blockly.Icon.prototype.createIcon_.call(this);

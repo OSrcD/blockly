@@ -232,8 +232,8 @@ Blockly.Xml.domToWorkspace = function(workspace, xml) {
  */
 Blockly.Xml.domToBlock_ = function(workspace, xmlBlock) {
   var prototypeName = xmlBlock.getAttribute('type');
-  var block = new Blockly.Block(workspace, prototypeName);
-  block.initSvg();
+  var block = new Blockly.Block(workspace, prototypeName);//´´½¨Ò»¸öblock¿é
+  block.initSvg();//äÖÈ¾block¿é
 
   var inline = xmlBlock.getAttribute('inline');
   if (inline) {
@@ -345,7 +345,7 @@ Blockly.Xml.domToBlock_ = function(workspace, xmlBlock) {
     // Rendering a child will render its parent.
     next.render();
   } else {
-    block.render();
+    block.render(); // äÖÈ¾ block ¿é
   }
   return block;
 };
