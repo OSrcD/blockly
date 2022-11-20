@@ -40,7 +40,7 @@ Blockly.inject = function(container, opt_options) {
     throw 'Error: container is not in current document.';
   }
   if (opt_options) {
-    // TODO(scr): don't mix this in to global variables.
+    // TODO(scr): don't mix this in to global variables. mixin 用于把第二个参数复制到第一个对象当中 类型 BeanUtils
     goog.mixin(Blockly, Blockly.parseOptions_(opt_options)); //进行复制到 Blockly 放入 blockly全局对象 一个 Toolbox 上面返回JSON对象
   }
   // 创建可视化区域

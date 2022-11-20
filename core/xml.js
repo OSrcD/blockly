@@ -233,7 +233,7 @@ Blockly.Xml.domToWorkspace = function(workspace, xml) {
 Blockly.Xml.domToBlock_ = function(workspace, xmlBlock) {
   var prototypeName = xmlBlock.getAttribute('type');
   var block = new Blockly.Block(workspace, prototypeName);//创建一个block块
-  block.initSvg();//渲染block块
+  block.initSvg();// 初始化block块 创建基本元素 文字 图标渲染
 
   var inline = xmlBlock.getAttribute('inline');
   if (inline) {
